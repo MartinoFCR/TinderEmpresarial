@@ -11,6 +11,7 @@ def usuario_list(request):
     serializer = UsuarioSerializer(usuarios, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
 def empresa_list(request):
     empresas = Empresa.objects.all()
     serializer = EmpresaSerializer(empresas, many=True)
@@ -26,6 +27,7 @@ def create_usuario(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST'])
 def create_empresa(request):
     serializer = EmpresaSerializer(data=request.data)
     if serializer.is_valid():
@@ -47,6 +49,7 @@ def update_usuario(request, pk):
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['PUT'])
 def update_empresa(request, pk):
     try:
         empresa = Empresa.objects.get(id=pk)
@@ -68,6 +71,7 @@ def delete_usuario(request, pk):
     usuario.delete()
     return Response('Usuario eliminado', status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['DELETE'])
 def delete_empresa(request, pk):
     try:
         empresa = Empresa.objects.get(id=pk)
