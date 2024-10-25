@@ -3,3 +3,57 @@
 *.jpeg
 *.png
 *.mp4
+
+# Carpetas del sistema
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+venv/
+env/
+.virtualenv/
+
+# Configuraciones locales
+*.env
+.env.local
+.env.*.local
+*.sqlite3
+
+# Archivos de configuraciones de Django y claves secretas
+/settings.py
+
+# Archivos de compilación y cache
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de migraciones de bases de datos (opcional si prefieres regenerarlos)
+migrations/
+
+# Archivos de bases de datos
+*.db
+
+# Archivos de coverage y pruebas
+htmlcov/
+.tox/
+.coverage
+*.cover
+.cache
+.pytest_cache/
+
+# Archivos y configuraciones de IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de dependencias (pip)
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Archivos de depuración de Django
+db.sqlite3
+debug.log
