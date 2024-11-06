@@ -18,5 +18,5 @@ function changeView(viewPath) {
 
 function logout() {
     alert("Sesión cerrada.");
-    window.location.href = "/../login/login.component.html";
+    window.location.href = "../login/login.component.html";
 }
