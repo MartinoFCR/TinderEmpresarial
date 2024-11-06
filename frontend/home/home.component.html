@@ -21,11 +21,11 @@
             <li onclick="changeView('views/moduleGestion.html')">
                 <i class="fas fa-cogs menu-icon"></i> Gestión
             </li>
-            <li onclick="changeView('views/moduleBusqueda.html')">
-                <i class="fas fa-search menu-icon"></i> Búsqueda
+            <li onclick="changeView('views/modulePublicacion.html')"> <!-- Ruta cambiada aquí -->
+                <i class="fas fa-edit menu-icon"></i> Publicación
             </li>
             <li onclick="changeView('views/moduleGestionClient.html')">
-                <i class="fas fa-users menu-icon"></i> Gestión de Clientes
+                <i class="fas fa-users menu-icon"></i> Búsqueda y Gestión de Clientes
             </li>
             <li onclick="changeView('views/moduleFavoritos.html')">
                 <i class="fas fa-star menu-icon"></i> Favoritos
@@ -37,12 +37,16 @@
             </button>
         </div>
     </div>
-    <div class="content" id="contentArea">
+    <div class="content">
         <div class="inner-content">
-            <p>Esta es la sección principal donde aparecerán los diferentes módulos.</p>
+            <!-- Este es el contenedor donde se cambiarán las vistas -->
+            <div id="module-view">
+                <!-- Imagen predeterminada al inicio -->
+                <img src="../images/ucompensar.jpg" alt="Imagen por defecto">
+            </div>
         </div>
     </div>
-
+    
     <!-- Archivo JavaScript -->
     <script src="scripts.js"></script>
 </body>
