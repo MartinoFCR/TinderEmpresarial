@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/proyecto xamp/Proyectos/InterfasTinder/login/login.component.css">
+    <style>
+        /* Aquí puedes agregar el CSS modificado */
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>¿Quién eres?</h2>
+        <div class="toggle-options">
+            <button class="toggle-button" onclick="showUserForm()">Usuario</button>
+            <button class="toggle-button" onclick="showCompanyForm()">Empresa</button>
+        </div>
+    
+        <div class="login-form" id="userForm">
+            <!-- Formulario de Usuario -->
+            <form onsubmit="return handleLogin(event, 'user')">
+                <h3>Login Usuario</h3>
+                <input type="email" placeholder="Correo" required id="userEmail" />
+                <input type="password" placeholder="Contraseña" required id="userPassword" />
+                <button type="submit">Iniciar Sesión</button>
+                <div class="error" id="userError" style="display: none;">
+                    <p>Credenciales incorrectas. Inténtalo de nuevo.</p>
+                </div>
+            </form>
+            <p class="forgot-password"><a href="/proyecto xamp/Proyectos/InterfasTinder/recover-password/recover-password.component.html">Olvidé mi contraseña</a></p>
+        </div>
+    
+        <div class="login-form" id="companyForm" style="display: none;">
+            <!-- Formulario de Empresa -->
+            <form onsubmit="return handleLogin(event, 'company')">
+                <h3>Login Empresa</h3>
+                <input type="email" placeholder="Correo de empresa" required id="companyEmail" />
+                <input type="password" placeholder="Contraseña" required id="companyPassword" />
+                <button type="submit" id="loginButton">Iniciar Sesión</button>
+                <div class="error" id="companyError" style="display: none;">
+                    <p>Credenciales incorrectas. Inténtalo de nuevo.</p>
+                </div>
+            </form>
+            <p class="forgot-password"><a href="/proyecto xamp/Proyectos/InterfasTinder/recover-password/recover-password.component.html">Olvidé mi contraseña</a></p>
+        </div>
+
+        <p class="signup-prompt">¿No tienes una cuenta? <a href="/proyecto xamp/Proyectos/InterfasTinder/signup/signup.component.html" id="createAccountLink">Crear cuenta</a></p>
+    </div>
+    
+    <script>
+        function showUserForm() {
+            document.getElementById('userForm').style.display = 'block';
+            document.getElementById('companyForm').style.display = 'none';
+            hideErrors();
+        }
+    
+        function showCompanyForm() {
+            document.getElementById('userForm').style.display = 'none';
+            document.getElementById('companyForm').style.display = 'block';
+            hideErrors();
+        }
+
+        function hideErrors() {
+            document.getElementById('userError').style.display = 'none';
+            document.getElementById('companyError').style.display = 'none';
+        }
+
+        function handleLogin(event, userType) {
+            event.preventDefault(); // Prevenir el comportamiento de envío del formulario
+
+            // Obtener el correo y la contraseña según el tipo de usuario
+            const userEmail = userType === 'user' ? document.getElementById('userEmail').value : document.getElementById('companyEmail').value;
+            const userPassword = userType === 'user' ? document.getElementById('userPassword').value : document.getElementById('companyPassword').value;
+
+            // Validar las credenciales (simulación)
+            if (!userEmail || !userPassword) {
+                const errorId = userType === 'user' ? 'userError' : 'companyError';
+                document.getElementById(errorId).style.display = 'block';
+                return false; // Detiene el envío del formulario
+            }
+
+            // Si las credenciales son correctas, redirigir al usuario
+            window.location.href = "/proyecto xamp/Proyectos/InterfasTinder/home/home.component.html"; // Cambia esta ruta a tu página de inicio
+            return true; // Asegura que el formulario se envíe si se necesita
+        }
+    </script>
+</body>
+</html>
