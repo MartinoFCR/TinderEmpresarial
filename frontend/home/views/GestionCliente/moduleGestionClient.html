@@ -1,0 +1,26 @@
+<div class="gestion-clientes-container">
+    <h2 class="modulo-title">Gestión de Clientes</h2>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+        <input type="text" id="search-client" class="search-input" placeholder="Buscar perfil...">
+        <button class="btn search-btn" onclick="buscarCliente()">Buscar</button>
+    </div>
+
+    <!-- Tabla de gestión de clientes -->
+    <table class="clientes-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Intereses</th>
+                <th>Correo</th>
+                <th>Perfil Laboral</th>
+                <th>Estado</th>
+                <th>Agregar a Favoritos</th>
+            </tr>
+        </thead>
+        <tbody id="clientes-list">
+            <!-- Aquí se llenarán los datos con JavaScript -->
+        </tbody>
+    </table>
+</div>
