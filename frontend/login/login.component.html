@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="/proyecto xamp/Proyectos/InterfasTinder/login/login.component.css">
+    <link rel="stylesheet" href="login.component.css">
     <style>
         /* Aquí puedes agregar el CSS modificado */
     </style>
@@ -28,7 +28,7 @@
                     <p>Credenciales incorrectas. Inténtalo de nuevo.</p>
                 </div>
             </form>
-            <p class="forgot-password"><a href="/proyecto xamp/Proyectos/InterfasTinder/recover-password/recover-password.component.html">Olvidé mi contraseña</a></p>
+            <p class="forgot-password"><a href="../recover-password/recover-password.component.html">Olvidé mi contraseña</a></p>
         </div>
     
         <div class="login-form" id="companyForm" style="display: none;">
@@ -42,10 +42,10 @@
                     <p>Credenciales incorrectas. Inténtalo de nuevo.</p>
                 </div>
             </form>
-            <p class="forgot-password"><a href="/proyecto xamp/Proyectos/InterfasTinder/recover-password/recover-password.component.html">Olvidé mi contraseña</a></p>
+            <p class="forgot-password"><a href="../recover-password/recover-password.component.html">Olvidé mi contraseña</a></p>
         </div>
 
-        <p class="signup-prompt">¿No tienes una cuenta? <a href="/proyecto xamp/Proyectos/InterfasTinder/signup/signup.component.html" id="createAccountLink">Crear cuenta</a></p>
+        <p class="signup-prompt">¿No tienes una cuenta? <a href="../signup/signup.component.html" id="createAccountLink">Crear cuenta</a></p>
     </div>
     
     <script>
@@ -81,7 +81,7 @@
             }
 
             // Si las credenciales son correctas, redirigir al usuario
-            window.location.href = "/proyecto xamp/Proyectos/InterfasTinder/home/home.component.html"; // Cambia esta ruta a tu página de inicio
+            window.location.href = "../home/home.component.html"; // Cambia esta ruta a tu página de inicio
             return true; // Asegura que el formulario se envíe si se necesita
         }
     </script>

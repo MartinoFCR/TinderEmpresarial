@@ -1,0 +1,89 @@
+/* Contenedor del módulo */
+.gestion-clientes-container, .favoritos-container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.modulo-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1e3a78;
+    margin-bottom: 20px;
+}
+
+/* Barra de búsqueda */
+.search-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #3a69b7;
+    border-radius: 8px;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.search-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    background-color: #1e3a78;
+    color: white;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.search-btn:hover {
+    background-color: #334e8a;
+    transform: scale(1.05);
+}
+
+/* Tabla de clientes */
+.clientes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.clientes-table th, .clientes-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+}
+
+.clientes-table th {
+    background-color: #1e3a78;
+    color: white;
+}
+
+.clientes-table td {
+    font-size: 16px;
+    color: #333;
+}
+
+.clientes-table td button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.clientes-table td button:hover {
+    background-color: #45a049;
+}

@@ -4,13 +4,13 @@ body {
   margin: 0;
   background-color: #f0f4ff;
   color: #333;
-  overflow: hidden;
+  overflow: hidden; /* Elimina el scroll global */
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* Para asegurar el espacio entre el nombre del programa y el nombre de usuario */
+  align-items: center; /* Alineamos verticalmente */
   background-color: #1e3a78;
   padding: 10px 20px;
   border-bottom: 4px solid #3a69b7;
@@ -26,6 +26,7 @@ body {
   font-size: 32px;
   font-weight: 700;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  flex: 1; /* El nombre del programa ocupa el espacio disponible */
 }
 
 .username {
@@ -34,6 +35,9 @@ body {
   color: #fff;
   font-size: 20px;
   font-weight: 400;
+  justify-content: flex-start; /* Asegura que el nombre de usuario se alinee correctamente */
+  margin-left: 10px; /* Espacio pequeño en la izquierda */
+  margin-right: 50px; /* Espacio pequeño en la derecha */
 }
 
 .icon {
@@ -43,12 +47,12 @@ body {
 .menu {
   background-color: #2c5282;
   width: 250px;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 80px); /* Ajuste según el header */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: fixed;
-  top: 100px;
+  top: 100px; /* Coloca el menú por debajo de la cabecera */
   z-index: 0;
 }
 
@@ -104,18 +108,44 @@ body {
 }
 
 .content {
-  margin-left: 270px;
-  margin-top: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  margin-left: 270px; /* Añadido espacio para el menú */
+  margin-top: 20px; /* Ajustado el espacio superior para que sea igual al espacio del lado derecho */
+  margin-right: 20px; /* Añadido un margen pequeño en el lado derecho */
   padding: 20px;
-  max-height: calc(100vh - 100px);
-  height: auto;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
   border: 2px solid #3a69b7;
+  height: calc(100vh - 180px); /* Ajuste para que la sección de contenido ocupe hasta el final del menú, arriba del botón de salida */
+  overflow: hidden; /* Evita el desplazamiento del contenido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content img {
+  width: 80%; /* Ajusta el tamaño de la imagen a un 80% del contenedor */
+  height: auto; /* Mantiene la relación de aspecto de la imagen */
+  object-fit: contain; /* Ajusta la imagen dentro del contenedor sin recortarla */
+  border-radius: 10px; /* Redondeo de bordes si lo deseas */
+  display: block; /* Asegura que la imagen se comporta como un bloque */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+#module-view {
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  height: 100%; /* Asegura que ocupe todo el alto disponible */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Evita el desplazamiento fuera de la vista */
+}
+
+#module-view img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Hace que la imagen se ajuste a la vista sin desbordarse */
+  border-radius: 10px;
 }
 
 .inner-content {
@@ -123,4 +153,5 @@ body {
   background-color: #f0f4ff;
   border-radius: 8px;
   margin-top: 20px;
+  height: calc(100vh - 120px); /* Ajusta el alto de la vista */
 }

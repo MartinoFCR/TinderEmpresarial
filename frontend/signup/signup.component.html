@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Cuenta</title>
-    <link rel="stylesheet" href="/proyecto xamp/Proyectos/InterfasTinder/signup/signup.component.css">
+    <link rel="stylesheet" href="signup.component.css">
     <style>
         /* Aquí puedes agregar el CSS modificado */
     </style>
@@ -18,7 +18,7 @@
             <input type="password" placeholder="Contraseña" required id="signupPassword" />
             <button type="submit">Crear Cuenta</button>
         </form>
-        <p class="login-prompt">¿Ya tienes una cuenta? <a href="/proyecto xamp/Proyectos/InterfasTinder/login/login.component.html" id="loginLink">Iniciar Sesión</a></p>
+        <p class="login-prompt">¿Ya tienes una cuenta? <a href="../login/login.component.html" id="loginLink">Iniciar Sesión</a></p>
     </div>
 
     <script>
@@ -33,7 +33,7 @@
             // Simulación de creación de cuenta (puedes agregar lógica de backend aquí)
 
             // Redirigir al login después de crear la cuenta
-            window.location.href = '/proyecto xamp/Proyectos/InterfasTinder/login/login.component.html';
+            window.location.href = '.../login/login.component.html';
             return false; // Detiene el envío del formulario
         }
     </script>

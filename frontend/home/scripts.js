@@ -1,5 +1,6 @@
-// scripts.js
+// Función para cambiar la vista al hacer clic en un módulo
 function changeView(viewPath) {
+    // Al hacer clic, mostramos el contenido correspondiente
     fetch(viewPath)
         .then(response => {
             if (!response.ok) {
@@ -8,15 +9,19 @@ function changeView(viewPath) {
             return response.text();
         })
         .then(data => {
-            document.getElementById('contentArea').innerHTML = data;
+            // Insertamos la vista en el contenedor #module-view
+            document.getElementById('module-view').innerHTML = data;
         })
         .catch(error => {
             console.error(error);
-            document.getElementById('contentArea').innerHTML = "<p>Error al cargar el contenido.</p>";
+            // Si hay error, mostramos un mensaje
+            document.getElementById('module-view').innerHTML = "<p>Error al cargar el contenido.</p>";
         });
 }
 
+// Función para cerrar sesión
 function logout() {
     alert("Sesión cerrada.");
-    window.location.href = "/proyecto xamp/Proyectos/InterfasTinder/login/login.component.html";
+    // Redirige al login después de cerrar sesión
+    window.location.href = "../login/login.component.html";
 }
