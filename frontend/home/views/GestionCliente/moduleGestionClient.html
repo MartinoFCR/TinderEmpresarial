@@ -1,26 +1,318 @@
-<div class="gestion-clientes-container">
-    <h2 class="modulo-title">Gestión de Clientes</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Clientes</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
 
-    <!-- Barra de búsqueda -->
-    <div class="search-container">
-        <input type="text" id="search-client" class="search-input" placeholder="Buscar perfil...">
-        <button class="btn search-btn" onclick="buscarCliente()">Buscar</button>
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Título */
+        .title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Buscador */
+        .search-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para la tabla con scroll */
+        .table-container {
+            width: 100%;
+            max-height: 400px; /* Ajusta la altura según el número de registros */
+            overflow-y: auto; /* Habilita el scroll vertical */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Estilos para el ícono del switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 50px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            border-radius: 50px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+        }
+
+        input:checked + .slider {
+            background-color: #4caf50;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(14px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">Gestión de Clientes</h2>
+        
+        <!-- Buscador -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-box" onkeyup="searchTable()" placeholder="Buscar por nombre, correo, etc.">
+        </div>
+
+        <!-- Contenedor de la tabla con scroll -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Intereses</th>
+                        <th>Correo</th>
+                        <th>Perfil Profesional</th>
+                        <th>Estado</th>
+                        <th>Agregar a Favoritos</th>
+                    </tr>
+                </thead>
+                <tbody id="clientes-list">
+                    <!-- 10 Registros de Clientes -->
+                    <tr>
+                        <td>Juan Pérez</td>
+                        <td>Tecnología, Marketing</td>
+                        <td>juan@example.com</td>
+                        <td>Desarrollador</td>
+                        <td>Activo</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleFavorite(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ana López</td>
+                        <td>Diseño, Arte</td>
+                        <td>ana@example.com</td>
+                        <td>Diseñadora Gráfica</td>
+                        <td>Activo</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleFavorite(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Carlos Martínez</td>
+                        <td>Marketing, Comunicación</td>
+                        <td>carlos@example.com</td>
+                        <td>Community Manager</td>
+                        <td>Inactivo</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleFavorite(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>María Gómez</td>
+                        <td>Ventas, Finanzas</td>
+                        <td>maria@example.com</td>
+                        <td>Gerente de Ventas</td>
+                        <td>Activo</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleFavorite(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>David Rodríguez</td>
+                        <td>Desarrollo, Programación</td>
+                        <td>david@example.com</td>
+                        <td>Programador Web</td>
+                        <td>Activo</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleFavorite(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sara Ruiz</td>
+                        <td>Gestión, Recursos Humanos</td>
+                        <td>sara@example.com</td>
+                        <td>Directora de RRHH</td>
+                        <td>Inactivo</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleFavorite(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Laura Rodríguez</td>
+                        <td>Diseño, Moda</td>
+                        <td>laura@example.com</td>
+                        <td>Diseñadora de Moda</td>
+                        <td>Activo</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleFavorite(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pedro García</td>
+                        <td>Desarrollo, Innovación</td>
+                        <td>pedro@example.com</td>
+                        <td>Ingeniero de Software</td>
+                        <td>Activo</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleFavorite(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Eva Fernández</td>
+                        <td>Negocios, Consultoría</td>
+                        <td>eva@example.com</td>
+                        <td>Consultora Empresarial</td>
+                        <td>Activo</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleFavorite(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Javier Sánchez</td>
+                        <td>Desarrollo, Inteligencia Artificial</td>
+                        <td>javier@example.com</td>
+                        <td>Ingeniero en IA</td>
+                        <td>Activo</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleFavorite(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <!-- Tabla de gestión de clientes -->
-    <table class="clientes-table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Intereses</th>
-                <th>Correo</th>
-                <th>Perfil Laboral</th>
-                <th>Estado</th>
-                <th>Agregar a Favoritos</th>
-            </tr>
-        </thead>
-        <tbody id="clientes-list">
-            <!-- Aquí se llenarán los datos con JavaScript -->
-        </tbody>
-    </table>
-</div>
+    <script>
+        function toggleFavorite(checkbox) {
+            // Lógica para agregar o quitar de favoritos
+            if (checkbox.checked) {
+                alert("Añadido a favoritos");
+            } else {
+                alert("Eliminado de favoritos");
+            }
+        }
+
+        function searchTable() {
+            let input = document.getElementById("searchInput");
+            let filter = input.value.toUpperCase();
+            let table = document.querySelector("table");
+            let trs = table.querySelectorAll("tbody tr");
+
+            trs.forEach(function(tr) {
+                let tds = tr.getElementsByTagName("td");
+                let show = false;
+                for (let i = 0; i < tds.length; i++) {
+                    if (tds[i].textContent.toUpperCase().includes(filter)) {
+                        show = true;
+                        break;
+                    }
+                }
+                tr.style.display = show ? "" : "none";
+            });
+        }
+    </script>
+</body>
+</html>
