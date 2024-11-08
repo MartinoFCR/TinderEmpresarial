@@ -1,18 +1,105 @@
-<div class="publicacion-container">
-    <h2 class="modulo-title">Publicación</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicación de Empresa</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 24px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .form-group textarea {
+            padding: 16px; /* Aumento del padding */
+            font-size: 18px; /* Aumento del tamaño de fuente */
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+            resize: vertical;
+            min-height: 200px; /* Aumento de la altura mínima */
+        }
+        .form-group textarea:focus {
+            border-color: #4a90e2;
+            outline: none;
+            background-color: #fff;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .button-container button {
+            padding: 12px 30px;
+            font-size: 16px;
+            color: white;
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button-container button:hover {
+            background-color: #357ab7;
+        }
+    </style>
+</head>
+<body>
 
-    <div class="input-container">
-        <label for="publicacion-text">Escribe tu publicación:</label>
-        <textarea id="publicacion-text" class="textarea"></textarea>
+    <div class="form-container">
+        <h2>Publicacion</h2>
+        <form id="publicacionForm">
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" placeholder="Descripción detallada del producto o servicio"></textarea>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" id="guardarButton">Publicar</button>
+            </div>
+        </form>
     </div>
 
-    <div class="actions-container">
-        <button class="btn aceptar" onclick="aceptarPublicacion()">Aceptar</button>
-        <button class="btn rechazar" onclick="rechazarPublicacion()">Rechazar</button>
-    </div>
+    <script>
+        // Manejar el evento de publicación
+        document.getElementById('publicacionForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+            // Obtener los valores del campo de descripción
+            const descripcion = document.getElementById('descripcion').value;
 
-    <div class="preview-container">
-        <h3>Vista previa:</h3>
-        <div id="preview-content" class="preview-box"></div>
-    </div>
-</div>
+            // Simulación de publicación
+            console.log("Publicación realizada:", { descripcion });
+
+            alert('¡Publicación realizada con éxito!');
+        });
+    </script>
+
+</body>
+</html>

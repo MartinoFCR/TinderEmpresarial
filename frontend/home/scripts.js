@@ -1,6 +1,6 @@
-// Función para cambiar la vista al hacer clic en un módulo
 function changeView(viewPath) {
-    // Al hacer clic, mostramos el contenido correspondiente
+    const moduleView = document.getElementById('module-view');
+    moduleView.innerHTML = "<p>Cargando...</p>";
     fetch(viewPath)
         .then(response => {
             if (!response.ok) {
@@ -9,19 +9,18 @@ function changeView(viewPath) {
             return response.text();
         })
         .then(data => {
-            // Insertamos la vista en el contenedor #module-view
-            document.getElementById('module-view').innerHTML = data;
+            moduleView.innerHTML = data;
         })
         .catch(error => {
             console.error(error);
-            // Si hay error, mostramos un mensaje
-            document.getElementById('module-view').innerHTML = "<p>Error al cargar el contenido.</p>";
+            moduleView.innerHTML = "<p>Error al cargar el contenido.</p>";
         });
 }
 
-// Función para cerrar sesión
 function logout() {
+    // Limpiar datos de sesión
+    sessionStorage.clear();
+    localStorage.clear();
     alert("Sesión cerrada.");
-    // Redirige al login después de cerrar sesión
     window.location.href = "../login/login.component.html";
 }
