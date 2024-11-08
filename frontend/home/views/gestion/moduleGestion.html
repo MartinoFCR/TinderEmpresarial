@@ -134,6 +134,14 @@
                 </div>
             </div>
 
+            <!-- Nuevo campo agregado -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="sitioWeb">Sitio Web</label>
+                    <input type="url" id="sitioWeb">
+                </div>
+            </div>
+
             <div class="button-container">
                 <button type="submit" id="saveButton">Guardar</button>
             </div>
@@ -154,6 +162,7 @@
                 representanteLegal: 'Juan Pérez',
                 password: '********',
                 codigoVerificacion: 'ABCD1234',
+                sitioWeb: 'https://www.empresa.com' // Nuevo campo con valor
             };
 
             // Rellenar los campos con los datos obtenidos
@@ -167,6 +176,7 @@
             document.getElementById('representanteLegal').value = datosEmpresa.representanteLegal;
             document.getElementById('password').value = datosEmpresa.password;
             document.getElementById('codigoVerificacion').value = datosEmpresa.codigoVerificacion;
+            document.getElementById('sitioWeb').value = datosEmpresa.sitioWeb; // Rellenar el campo sitio web
         }
 
         // Llamar a la función cargarDatos para que los datos se muestren al cargar la vista
