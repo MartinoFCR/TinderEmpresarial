@@ -1,25 +1,91 @@
-<div class="favoritos-container">
-    <h2 class="modulo-title">Favoritos</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
 
-    <!-- Barra de búsqueda -->
-    <div class="search-container">
-        <input type="text" id="search-favoritos" class="search-input" placeholder="Buscar perfil...">
-        <button class="btn search-btn" onclick="buscarFavorito()">Buscar</button>
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Título */
+        .title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Estilo para la tabla con scroll */
+        .table-container {
+            width: 100%;
+            max-height: 400px; /* Ajusta la altura según el número de registros */
+            overflow-y: auto; /* Habilita el scroll vertical */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">Favoritos</h2>
+        
+        <!-- Contenedor de la tabla con scroll -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Perfil Profesional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- No hay registros en Favoritos -->
+                    <tr>
+                        <td colspan="3" style="text-align:center; padding: 20px;">No tienes clientes favoritos.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <!-- Tabla de favoritos -->
-    <table class="clientes-table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Intereses</th>
-                <th>Correo</th>
-                <th>Perfil Laboral</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody id="favoritos-list">
-            <!-- Aquí se llenarán los datos con JavaScript -->
-        </tbody>
-    </table>
-</div>
+    
+</body>
+</html>
