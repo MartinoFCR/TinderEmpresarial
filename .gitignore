@@ -12,6 +12,7 @@ __pycache__/
 # Entornos virtuales
 venv/
 env/
+myenv/
 .virtualenv/
 
 # Configuraciones locales

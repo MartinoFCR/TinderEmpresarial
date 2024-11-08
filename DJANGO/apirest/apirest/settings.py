@@ -74,17 +74,17 @@ WSGI_APPLICATION = 'apirest.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+from decouple import config
 from decouple import config
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
+        'NAME': config('railway'),
+        'USER': config('postgres'),
+        'PASSWORD': config('duEInNeXhykVOfSikFGnSTlwUcrhnZLP'),
+        'HOST': config('autorack.proxy.rlwy.net'),
+        'PORT': config('16826'),
         'OPTIONS': {
             'options': '-c search_path=develop'  # Aquí defines el esquema a usar
         }  
