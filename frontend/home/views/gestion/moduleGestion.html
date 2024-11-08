@@ -3,181 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Datos</title>
+    <title>Gestión de Clientes</title>
     <style>
+        /* Estilos generales */
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
             padding: 0;
         }
-        .form-container {
-            max-width: 1200px;
+
+        .container {
+            width: 100%;
+            max-width: 800px;
             margin: 40px auto;
-            padding: 30px;
-            background-color: white;
+            padding: 20px;
+            background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ddd;
-        }
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-            font-size: 24px;
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-        .form-group {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
+            align-items: center;
+        }
+
+        /* Título */
+        .title {
+            font-size: 28px;
+            color: #333;
             margin-bottom: 20px;
-        }
-        .form-group label {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #555;
-        }
-        .form-group input {
-            padding: 12px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-            transition: border-color 0.3s ease;
-        }
-        .form-group input:focus {
-            border-color: #4a90e2;
-            outline: none;
-            background-color: #fff;
-        }
-        .button-container {
             text-align: center;
-            margin-top: 40px;
         }
-        .button-container button {
-            padding: 12px 30px;
+
+        /* Estilo para la tabla con scroll */
+        .table-container {
+            width: 100%;
+            max-height: 400px; /* Ajusta la altura según el número de registros */
+            overflow-y: auto; /* Habilita el scroll vertical */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
             font-size: 16px;
-            color: white;
-            background-color: #4a90e2;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
         }
-        .button-container button:hover {
-            background-color: #357ab7;
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
         }
     </style>
 </head>
 <body>
-
-    <div class="form-container">
-        <h2>Gestión de Empresa</h2>
-        <form id="gestionForm">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="nit">NIT</label>
-                    <input type="text" id="nit">
-                </div>
-                <div class="form-group">
-                    <label for="razonSocial">Razón Social</label>
-                    <input type="text" id="razonSocial">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email">
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono</label>
-                    <input type="text" id="telefono">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="ciudad">Ciudad</label>
-                    <input type="text" id="ciudad">
-                </div>
-                <div class="form-group">
-                    <label for="categoria">Categoría</label>
-                    <input type="text" id="categoria">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="direccion">Dirección</label>
-                    <input type="text" id="direccion">
-                </div>
-                <div class="form-group">
-                    <label for="representanteLegal">Representante Legal</label>
-                    <input type="text" id="representanteLegal">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="password">
-                </div>
-                <div class="form-group">
-                    <label for="codigoVerificacion">Código de Verificación</label>
-                    <input type="text" id="codigoVerificacion">
-                </div>
-            </div>
-
-            <div class="button-container">
-                <button type="submit" id="saveButton">Guardar</button>
-            </div>
-        </form>
+    <div class="container">
+        <h2 class="title">Gestión de Clientes</h2>
+        
+        <!-- Contenedor de la tabla con scroll -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Perfil Profesional</th>
+                        <th>Agregar a Favoritos</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaClientes">
+                    <!-- Los registros de clientes se mostrarán aquí -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
-        // Cargar datos de ejemplo
-        function cargarDatos() {
-            const datosEmpresa = {
-                nit: '123456789',
-                razonSocial: 'Empresa Ejemplo S.A.',
-                email: 'contacto@empresa.com',
-                telefono: '3012345678',
-                ciudad: 'Bogotá',
-                categoria: 'Tecnología',
-                direccion: 'Carrera 15 #100-60',
-                representanteLegal: 'Juan Pérez',
-                password: '********',
-                codigoVerificacion: 'ABCD1234',
-            };
+        // Datos de ejemplo (esto debería ser dinámico en un caso real)
+        const clientes = [
+            { nombre: 'Juan Pérez', correo: 'juanperez@example.com', perfil: 'Ingeniero de software' },
+            { nombre: 'Ana Gómez', correo: 'anagomez@example.com', perfil: 'Diseñadora gráfica' },
+            { nombre: 'Luis Rodríguez', correo: 'luisrodriguez@example.com', perfil: 'Analista de datos' },
+            { nombre: 'María López', correo: 'marialopez@example.com', perfil: 'Marketing digital' },
+        ];
 
-            // Rellenar los campos con los datos obtenidos
-            document.getElementById('nit').value = datosEmpresa.nit;
-            document.getElementById('razonSocial').value = datosEmpresa.razonSocial;
-            document.getElementById('email').value = datosEmpresa.email;
-            document.getElementById('telefono').value = datosEmpresa.telefono;
-            document.getElementById('ciudad').value = datosEmpresa.ciudad;
-            document.getElementById('categoria').value = datosEmpresa.categoria;
-            document.getElementById('direccion').value = datosEmpresa.direccion;
-            document.getElementById('representanteLegal').value = datosEmpresa.representanteLegal;
-            document.getElementById('password').value = datosEmpresa.password;
-            document.getElementById('codigoVerificacion').value = datosEmpresa.codigoVerificacion;
+        // Función para cargar los registros en la tabla
+        function cargarClientes() {
+            const tablaClientes = document.getElementById('tablaClientes');
+            tablaClientes.innerHTML = '';
+
+            clientes.forEach(cliente => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${cliente.nombre}</td>
+                    <td>${cliente.correo}</td>
+                    <td>${cliente.perfil}</td>
+                    <td>
+                        <input type="checkbox" onclick="agregarAFavoritos('${cliente.nombre}', '${cliente.correo}', '${cliente.perfil}')">
+                    </td>
+                `;
+                tablaClientes.appendChild(row);
+            });
         }
 
-        // Llamar a la función cargarDatos para que los datos se muestren al cargar la vista
-        cargarDatos();
+        // Función para agregar cliente a favoritos
+        function agregarAFavoritos(nombre, correo, perfil) {
+            let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+            const cliente = { nombre, correo, perfil };
 
-        // Manejar el evento de guardar (aunque los campos son siempre editables)
-        document.getElementById('gestionForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
-            console.log('Datos guardados');
-        });
+            // Verificar si el cliente ya está en favoritos
+            if (!favoritos.some(f => f.nombre === nombre)) {
+                favoritos.push(cliente);
+                localStorage.setItem('favoritos', JSON.stringify(favoritos));
+                alert('Cliente agregado a favoritos');
+            }
+        }
+
+        // Cargar los clientes cuando se carga la página
+        window.onload = cargarClientes;
     </script>
-
 </body>
 </html>
