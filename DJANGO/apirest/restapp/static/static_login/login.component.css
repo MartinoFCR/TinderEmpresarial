@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #eceff1;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 25px;
+    background-color: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    font-size: 24px;
+    color: #37474f;
+    margin-bottom: 15px; /* Aumenté el espacio debajo del título */
+}
+
+h3 {
+    font-size: 20px;
+    color: #37474f;
+    margin-bottom: 15px; /* Mantengo espacio consistente */
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 6px 0;
+    border: 1px solid #b0bec5;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #0288d1;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #0288d1;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0277bd;
+}
+
+.error {
+    color: #d32f2f;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.forgot-password,
+.signup-prompt {
+    margin-top: 10px; /* Aumenté la separación arriba */
+    font-size: 14px;
+    color: #607d8b;
+}
+
+.forgot-password a,
+.signup-prompt a {
+    text-decoration: none;
+    color: #0288d1;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.forgot-password a:hover,
+.signup-prompt a:hover {
+    color: #01579b;
+}
+
+.toggle-options {
+  margin: 20px 0; /* Espacio entre las opciones */
+}
+
+.toggle-button {
+  width: 100%; /* Asegura que ocupen todo el ancho */
+  padding: 12px; /* Igual que el botón de iniciar sesión */
+  border-radius: 8px; /* Redondeo como el botón de iniciar sesión */
+  border: none; /* Sin borde */
+  background-color: #0288d1; /* Color de fondo igual que el botón de iniciar sesión */
+  color: #ffffff; /* Color del texto blanco */
+  font-size: 16px; /* Igual al botón de iniciar sesión */
+  font-weight: bold; /* Texto en negrita */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  margin-top: 8px; /* Espacio entre los botones */
+  transition: background-color 0.3s; /* Transición de color al pasar el mouse */
+}
+
+.toggle-button:hover {
+  background-color: #0277bd; /* Color al pasar el mouse */
+}
