@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Datos</title>
+    <title>Formulario de Selección de Categorías</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -19,6 +19,8 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             border: 1px solid #ddd;
+            overflow-y: auto;
+            max-height: 90vh;
         }
         .form-container h2 {
             text-align: center;
@@ -28,8 +30,8 @@
         }
         .form-row {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0px;
         }
         .form-group {
             display: flex;
@@ -42,15 +44,18 @@
             margin-bottom: 8px;
             color: #555;
         }
-        .form-group input {
-            padding: 12px;
-            font-size: 16px;
+        .form-group input,
+        .form-group select {
+            padding: 8px;
+            font-size: 14px;
             border: 1px solid #ddd;
             border-radius: 4px;
             background-color: #f9f9f9;
             transition: border-color 0.3s ease;
+            width: 70%; /* Ajustado el ancho para que sea un 10% más amplio */
         }
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group select:focus {
             border-color: #4a90e2;
             outline: none;
             background-color: #fff;
@@ -60,8 +65,8 @@
             margin-top: 40px;
         }
         .button-container button {
-            padding: 12px 30px;
-            font-size: 16px;
+            padding: 10px 20px;
+            font-size: 14px;
             color: white;
             background-color: #4a90e2;
             border: none;
@@ -72,12 +77,88 @@
         .button-container button:hover {
             background-color: #357ab7;
         }
+
+        /* Estilos solo para el menú de categorías */
+        .categories-select {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .categories-select button {
+            width: 70%; /* Ajustado el ancho para que sea igual al de los otros inputs */
+            padding: 8px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .categories-select button:focus {
+            border-color: #4a90e2;
+            outline: none;
+            background-color: #fff;
+        }
+
+        .categories-select .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            z-index: 10;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .categories-select button:focus + .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content label {
+            padding: 8px 10px;
+            display: block;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content label:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Reducción del tamaño del checkbox */
+        .dropdown-content input[type="checkbox"] {
+            transform: scale(0.8); /* Reduce el tamaño del checkbox */
+            margin-right: 10px;
+        }
+
+        .categories-selected {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="form-container">
-        <h2>Informacion</h2>
+        <h2>Información</h2>
         <form id="gestionForm">
             <div class="form-row">
                 <div class="form-group">
@@ -87,6 +168,11 @@
                 <div class="form-group">
                     <label for="razonSocial">Razón Social</label>
                     <input type="text" id="razonSocial">
+                </div>
+                <div class="form-group">
+                    <label for="galeriaImagenes">Galería de Imágenes</label>
+                    <input type="file" id="galeriaImagenes" accept="image/*" multiple>
+                    <small></small>
                 </div>
             </div>
 
@@ -99,6 +185,18 @@
                     <label for="telefono">Teléfono</label>
                     <input type="text" id="telefono">
                 </div>
+                <div class="form-group categories-select">
+                    <label for="categoria">Selecciona Categorías</label>
+                    <button type="button" id="toggleCategories" onclick="toggleDropdown()">Selecciona categorías</button>
+                    <div class="dropdown-content" id="categoryDropdown">
+                        <label><input type="checkbox" value="tecnologia" id="catTecnologia" onchange="updateSelection()"> Tecnología</label>
+                        <label><input type="checkbox" value="salud" id="catSalud" onchange="updateSelection()"> Salud</label>
+                        <label><input type="checkbox" value="educacion" id="catEducacion" onchange="updateSelection()"> Educación</label>
+                        <label><input type="checkbox" value="finanzas" id="catFinanzas" onchange="updateSelection()"> Finanzas</label>
+                        <label><input type="checkbox" value="comercio" id="catComercio" onchange="updateSelection()"> Comercio</label>
+                    </div>
+                    <div id="selectedCategories" class="categories-selected"></div>
+                </div>
             </div>
 
             <div class="form-row">
@@ -106,13 +204,6 @@
                     <label for="ciudad">Ciudad</label>
                     <input type="text" id="ciudad">
                 </div>
-                <div class="form-group">
-                    <label for="categoria">Categoría</label>
-                    <input type="text" id="categoria">
-                </div>
-            </div>
-
-            <div class="form-row">
                 <div class="form-group">
                     <label for="direccion">Dirección</label>
                     <input type="text" id="direccion">
@@ -132,10 +223,6 @@
                     <label for="codigoVerificacion">Código de Verificación</label>
                     <input type="text" id="codigoVerificacion">
                 </div>
-            </div>
-
-            <!-- Nuevo campo agregado -->
-            <div class="form-row">
                 <div class="form-group">
                     <label for="sitioWeb">Sitio Web</label>
                     <input type="url" id="sitioWeb">
@@ -149,45 +236,36 @@
     </div>
 
     <script>
-        // Cargar datos de ejemplo
-        function cargarDatos() {
-            const datosEmpresa = {
-                nit: '123456789',
-                razonSocial: 'Empresa Ejemplo S.A.',
-                email: 'contacto@empresa.com',
-                telefono: '3012345678',
-                ciudad: 'Bogotá',
-                categoria: 'Tecnología',
-                direccion: 'Carrera 15 #100-60',
-                representanteLegal: 'Juan Pérez',
-                password: '********',
-                codigoVerificacion: 'ABCD1234',
-                sitioWeb: 'https://www.empresa.com' // Nuevo campo con valor
-            };
+        // Para manejar la visibilidad del dropdown de categorías
+        let selectedCategories = [];
 
-            // Rellenar los campos con los datos obtenidos
-            document.getElementById('nit').value = datosEmpresa.nit;
-            document.getElementById('razonSocial').value = datosEmpresa.razonSocial;
-            document.getElementById('email').value = datosEmpresa.email;
-            document.getElementById('telefono').value = datosEmpresa.telefono;
-            document.getElementById('ciudad').value = datosEmpresa.ciudad;
-            document.getElementById('categoria').value = datosEmpresa.categoria;
-            document.getElementById('direccion').value = datosEmpresa.direccion;
-            document.getElementById('representanteLegal').value = datosEmpresa.representanteLegal;
-            document.getElementById('password').value = datosEmpresa.password;
-            document.getElementById('codigoVerificacion').value = datosEmpresa.codigoVerificacion;
-            document.getElementById('sitioWeb').value = datosEmpresa.sitioWeb; // Rellenar el campo sitio web
+        function toggleDropdown() {
+            const dropdown = document.getElementById('categoryDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Llamar a la función cargarDatos para que los datos se muestren al cargar la vista
-        cargarDatos();
+        // Actualizar las categorías seleccionadas
+        function updateSelection() {
+            selectedCategories = [];
+            const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]:checked');
+            checkboxes.forEach(checkbox => {
+                selectedCategories.push(checkbox.value);
+            });
 
-        // Manejar el evento de guardar (aunque los campos son siempre editables)
-        document.getElementById('gestionForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
-            console.log('Datos guardados');
-        });
+            // Actualizar el texto del botón con las categorías seleccionadas
+            const button = document.getElementById('toggleCategories');
+            if (selectedCategories.length > 0) {
+                button.innerHTML = selectedCategories.join(', ');
+            } else {
+                button.innerHTML = 'Selecciona categorías';
+            }
+
+            // Mostrar las categorías seleccionadas debajo del botón
+            const selectedDiv = document.getElementById('selectedCategories');
+            selectedDiv.innerHTML = selectedCategories.length > 0 ? `Categorías seleccionadas: ${selectedCategories.join(', ')}` : '';
+        }
     </script>
 
 </body>
 </html>
+
