@@ -5,19 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="login.component.css">
-    <style>
-        /* Aquí puedes agregar el CSS modificado */
-    </style>
 </head>
 <body>
     <div class="login-container">
         <h2>¿Quién eres?</h2>
         <div class="toggle-options">
-            <button class="toggle-button" onclick="showUserForm()">Usuario</button>
-            <button class="toggle-button" onclick="showCompanyForm()">Empresa</button>
+            <button class="toggle-button" id="userButton" onclick="showUserForm()">Usuario</button>
+            <button class="toggle-button" id="companyButton" onclick="showCompanyForm()">Empresa</button>
         </div>
     
-        <div class="login-form" id="userForm">
+        <div class="login-form" id="userForm" style="display: none;">
             <!-- Formulario de Usuario -->
             <form onsubmit="return handleLogin(event, 'user')">
                 <h3>Login Usuario</h3>
@@ -48,62 +45,6 @@
         <p class="signup-prompt">¿No tienes una cuenta? <a href="../signup/signup.component.html" id="createAccountLink">Crear cuenta</a></p>
     </div>
     
-    <script>
-        function showUserForm() {
-            document.getElementById('userForm').style.display = 'block';
-            document.getElementById('companyForm').style.display = 'none';
-            hideErrors();
-        }
-    
-        function showCompanyForm() {
-            document.getElementById('userForm').style.display = 'none';
-            document.getElementById('companyForm').style.display = 'block';
-            hideErrors();
-        }
-
-        function hideErrors() {
-            document.getElementById('userError').style.display = 'none';
-            document.getElementById('companyError').style.display = 'none';
-        }
-
-        function handleLogin(event, userType) {
-            document.getElementById("userForm").addEventListener("submit", async function(event) {
-            event.preventDefault(); // Prevenir el comportamiento de envío del formulario
-
-            // Obtener el correo y la contraseña según el tipo de usuario
-            const userEmail = userType === 'user' ? document.getElementById('userEmail').value : document.getElementById('companyEmail').value;
-            const userPassword = userType === 'user' ? document.getElementById('userPassword').value : document.getElementById('companyPassword').value;
-
-            // Validar las credenciales (simulación)
-            try {
-                const response = await fetch("http://localhost:8000/api/login/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ userEmail, userPassword }),
-                });
-                const data = await response.json();
-                console.log(data);
-                const messageDiv = document.getElementById("userMessage");
-
-                if (response.ok) {
-                    messageDiv.innerText = "Inicio de sesión exitoso";
-                    window.location.href = "../home/home.component.html";
-                    localStorage.setItem("access_token", data.access);
-                    localStorage.setItem("refresh_token", data.refresh);
-                } else {
-                    messageDiv.innerText = data.error || "Error al iniciar sesión";
-                }
-            } catch (error) {
-                console.error("Error:", error);
-            }
-            });
-            // Si las credenciales son correctas, redirigir al usuario
-            //window.location.href = "../home/home.component.html"; // Cambia esta ruta a tu página de inicio
-            //return true; // Asegura que el formulario se envíe si se necesita -->
-            
-        }
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
