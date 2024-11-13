@@ -21,22 +21,18 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 h2 {
     font-size: 24px;
     color: #37474f;
-    margin-bottom: 15px; /* Aumenté el espacio debajo del título */
+    margin-bottom: 15px;
 }
 
 h3 {
     font-size: 20px;
     color: #37474f;
-    margin-bottom: 15px; /* Mantengo espacio consistente */
+    margin-bottom: 15px;
     margin-top: 10px;
 }
 
@@ -74,51 +70,44 @@ button:hover {
     background-color: #0277bd;
 }
 
-.error {
-    color: #d32f2f;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.forgot-password,
-.signup-prompt {
-    margin-top: 10px; /* Aumenté la separación arriba */
-    font-size: 14px;
-    color: #607d8b;
-}
-
-.forgot-password a,
-.signup-prompt a {
-    text-decoration: none;
-    color: #0288d1;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.forgot-password a:hover,
-.signup-prompt a:hover {
-    color: #01579b;
-}
-
 .toggle-options {
-  margin: 20px 0; /* Espacio entre las opciones */
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 .toggle-button {
-  width: 100%; /* Asegura que ocupen todo el ancho */
-  padding: 12px; /* Igual que el botón de iniciar sesión */
-  border-radius: 8px; /* Redondeo como el botón de iniciar sesión */
-  border: none; /* Sin borde */
-  background-color: #0288d1; /* Color de fondo igual que el botón de iniciar sesión */
-  color: #ffffff; /* Color del texto blanco */
-  font-size: 16px; /* Igual al botón de iniciar sesión */
-  font-weight: bold; /* Texto en negrita */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-  margin-top: 8px; /* Espacio entre los botones */
-  transition: background-color 0.3s; /* Transición de color al pasar el mouse */
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #cfd8dc;
+    color: #37474f;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .toggle-button:hover {
-  background-color: #0277bd; /* Color al pasar el mouse */
+    background-color: #b0bec5;
+}
+
+.toggle-button.active {
+    background-color: #0288d1;
+    color: #ffffff;
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.signup-prompt {
+    margin-top: 20px;
+}
+
+.signup-prompt a {
+    color: #0288d1;
+    text-decoration: none;
 }
