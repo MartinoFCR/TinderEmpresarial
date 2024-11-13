@@ -28,6 +28,7 @@ function hideErrors() {
 
 // Manejo del envío del formulario de login
 function handleLogin(event, userType) {
+    document.getElementById("userForm").addEventListener("submit", async function(event) {
     event.preventDefault(); // Prevenir el comportamiento de envío del formulario
 
     // Obtener el correo y la contraseña según el tipo de usuario
@@ -35,21 +36,37 @@ function handleLogin(event, userType) {
     const userPassword = userType === 'user' ? document.getElementById('userPassword').value : document.getElementById('companyPassword').value;
 
     // Validar las credenciales (simulación)
-    if (!userEmail || !userPassword) {
-        const errorId = userType === 'user' ? 'userError' : 'companyError';
-        document.getElementById(errorId).style.display = 'block';
-        return false; // Detiene el envío del formulario
-    }
+    try {
+        const response = await fetch("http://localhost:8000/api/login/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail, userPassword }),
+        });
+        const data = await response.json();
+        console.log(data);
+        const messageDiv = document.getElementById("userMessage");
 
-    // Redirigir al home si las credenciales son correctas
-    window.location.href = "../home/home.component.html";
-    return true;
+        if (response.ok) {
+            messageDiv.innerText = "Inicio de sesión exitoso";
+            window.location.href = "../home/home.component.html";
+            localStorage.setItem("access_token", data.access);
+            localStorage.setItem("refresh_token", data.refresh);
+        } else {
+            messageDiv.innerText = data.error || "Error al iniciar sesión";
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+    });
+    // Si las credenciales son correctas, redirigir al usuario
+    //window.location.href = "../home/home.component.html"; // Cambia esta ruta a tu página de inicio
+    //return true; // Asegura que el formulario se envíe si se necesita -->
+    
 }
 
-// Redirigir al home cuando se hace clic en "Iniciar Sesión"
-document.getElementById('loginButton').addEventListener('click', function() {
-    window.location.href = "../home/home.component.html";
-});
+
 
 // Redirigir a la página de crear cuenta cuando se hace clic en "Crear Cuenta"
 document.getElementById('createAccountLink').addEventListener('click', function() {
