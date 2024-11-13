@@ -1,3 +1,5 @@
+
+
 function changeView(viewPath) {
     const moduleView = document.getElementById('module-view');
     moduleView.innerHTML = "<p>Cargando...</p>";

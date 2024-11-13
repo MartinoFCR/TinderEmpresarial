@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -11,13 +12,27 @@ def usuario_list(request):
     serializer = UsuarioSerializer(usuarios, many=True)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def api_login(request):
+    try:
+        usuario = Usuario.objects.get(correo_electronico=request.data['userEmail'], contrasena=request.data['userPassword'])  
+    except Usuario.DoesNotExist:
+        if 'email' not in request.data or 'password' not in request.data:
+            return Response('Faltan datos', status=status.HTTP_400_BAD_REQUEST)
+        return Response('Usuario no encontrado',status=status.HTTP_404_NOT_FOUND)
+    serializer = UsuarioSerializer(usuario)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def mi_vista(request):
+    mensaje = "¡Hola, bienvenido!"
+    return render(request, 'home.component.html', {'mensaje': mensaje})
+
 @api_view(['GET'])
 def empresa_list(request):
     empresas = Empresa.objects.all()
     serializer = EmpresaSerializer(empresas, many=True)
     return Response(serializer.data)
-
-
 
 @api_view(['POST'])
 def create_usuario(request):
