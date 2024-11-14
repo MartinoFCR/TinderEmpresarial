@@ -1,70 +1,112 @@
 // Función para mostrar el formulario de usuario y ocultar el de empresa
 function showUserForm() {
-    // Mostrar formulario de usuario
     document.getElementById('userForm').style.display = 'block';
-    // Ocultar formulario de empresa
     document.getElementById('companyForm').style.display = 'none';
-    // Ocultar el mensaje de "¿No tienes una cuenta? Crear cuenta"
-    document.getElementById('signupPrompt').style.display = 'none';
-    // Mostrar el botón de "Volver" y ocultar el otro
+    hideErrors();
+
+    // Ocultar el botón de "Empresa" cuando se muestra el formulario de "Usuario"
     document.getElementById('companyButton').style.display = 'none';
-    document.getElementById('userButton').style.display = 'inline';
+
+    // Mostrar el botón de "Volver"
+    document.getElementById('userButton').style.display = 'block';
+
+    // Cambiar estilos de los botones
+    document.getElementById('userButton').classList.add('active');
+    document.getElementById('companyButton').classList.remove('active');
 }
 
 // Función para mostrar el formulario de empresa y ocultar el de usuario
 function showCompanyForm() {
-    // Mostrar formulario de empresa
-    document.getElementById('companyForm').style.display = 'block';
-    // Ocultar formulario de usuario
     document.getElementById('userForm').style.display = 'none';
-    // Ocultar el mensaje de "¿No tienes una cuenta? Crear cuenta"
-    document.getElementById('signupPrompt').style.display = 'none';
-    // Mostrar el botón de "Volver" y ocultar el otro
+    document.getElementById('companyForm').style.display = 'block';
+    hideErrors();
+
+    // Ocultar el botón de "Usuario" cuando se muestra el formulario de "Empresa"
     document.getElementById('userButton').style.display = 'none';
-    document.getElementById('companyButton').style.display = 'inline';
+
+    // Mostrar el botón de "Volver"
+    document.getElementById('companyButton').style.display = 'block';
+
+    // Cambiar estilos de los botones
+    document.getElementById('companyButton').classList.add('active');
+    document.getElementById('userButton').classList.remove('active');
 }
 
-// Función para volver a la pantalla principal
+// Ocultar errores al cambiar de formulario
+function hideErrors() {
+    document.getElementById('userError').style.display = 'none';
+    document.getElementById('companyError').style.display = 'none';
+}
+
+// Función para ocultar los formularios y volver a la pantalla principal
 function goBack() {
-    // Ocultar ambos formularios
     document.getElementById('userForm').style.display = 'none';
     document.getElementById('companyForm').style.display = 'none';
-    // Mostrar el mensaje de "¿No tienes una cuenta? Crear cuenta"
-    document.getElementById('signupPrompt').style.display = 'block';
-    // Mostrar los botones de selección (Usuario y Empresa)
-    document.getElementById('companyButton').style.display = 'inline';
-    document.getElementById('userButton').style.display = 'inline';
+    hideErrors();
+
+    // Mostrar ambos botones
+    document.getElementById('userButton').style.display = 'block';
+    document.getElementById('companyButton').style.display = 'block';
+
+    // Remover la clase activa de ambos botones
+    document.getElementById('userButton').classList.remove('active');
+    document.getElementById('companyButton').classList.remove('active');
 }
 
-// Función para manejar el login de usuario y empresa
+// Función para manejar el envío del formulario de login
 function handleLogin(event, userType) {
-    event.preventDefault();
+    event.preventDefault(); // Prevenir el comportamiento de envío del formulario
 
+    // Obtener el correo y la contraseña según el tipo de usuario
+    const userEmail = userType === 'user' ? document.getElementById('userEmail').value : document.getElementById('companyEmail').value;
+    const userPassword = userType === 'user' ? document.getElementById('userPassword').value : document.getElementById('companyPassword').value;
+
+    // Credenciales simuladas para la validación (esto sería reemplazado por una llamada a tu API backend)
+    const validUserCredentials = {
+        email: 'usuario@example.com',
+        password: 'usuario123'
+    };
+
+    const validCompanyCredentials = {
+        email: 'empresa@example.com',
+        password: 'empresasa123'
+    };
+
+    let isValid = false;
+    let errorId = '';
+
+    // Verificar si las credenciales son correctas
     if (userType === 'user') {
-        // Obtener los valores de los campos del formulario de usuario
-        var email = document.getElementById('userEmail').value;
-        var password = document.getElementById('userPassword').value;
-
-        // Validar las credenciales (esto es solo un ejemplo, puedes agregar tu lógica aquí)
-        if (email === 'usuario@ejemplo.com' && password === 'contraseña123') {
-            alert('Bienvenido Usuario');
-            // Redirigir a la página principal del usuario o realizar alguna otra acción
+        if (userEmail === validUserCredentials.email && userPassword === validUserCredentials.password) {
+            isValid = true;
         } else {
-            // Mostrar mensaje de error
-            document.getElementById('userError').style.display = 'block';
+            errorId = 'userError';
         }
     } else if (userType === 'company') {
-        // Obtener los valores de los campos del formulario de empresa
-        var email = document.getElementById('companyEmail').value;
-        var password = document.getElementById('companyPassword').value;
-
-        // Validar las credenciales (esto es solo un ejemplo, puedes agregar tu lógica aquí)
-        if (email === 'empresa@ejemplo.com' && password === 'contraseña456') {
-            alert('Bienvenido Empresa');
-            // Redirigir a la página principal de la empresa o realizar alguna otra acción
+        if (userEmail === validCompanyCredentials.email && userPassword === validCompanyCredentials.password) {
+            isValid = true;
         } else {
-            // Mostrar mensaje de error
-            document.getElementById('companyError').style.display = 'block';
+            errorId = 'companyError';
         }
     }
+
+    // Mostrar mensaje de error si las credenciales son incorrectas
+    if (!isValid) {
+        document.getElementById(errorId).style.display = 'block';
+        return false;
+    }
+
+    // Si las credenciales son correctas, redirigir al home
+    window.location.href = "../home/home.component.html";
+    return true;
 }
+
+// Redirigir al home cuando se hace clic en "Iniciar Sesión"
+document.getElementById('loginButton').addEventListener('click', function() {
+    window.location.href = "../home/home.component.html";
+});
+
+// Redirigir a la página de crear cuenta cuando se hace clic en "Crear Cuenta"
+document.getElementById('createAccountLink').addEventListener('click', function() {
+    window.location.href = "../signup/signup.component.html";
+});
