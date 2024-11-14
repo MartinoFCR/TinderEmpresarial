@@ -5,32 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Cuenta</title>
     <link rel="stylesheet" href="signup.component.css">
-    <style>
-        /* Aquí puedes agregar el CSS modificado */
-    </style>
 </head>
 <body>
     <div class="signup-container">
-        <h2>Crear Cuenta</h2>
-        <form onsubmit="return handleCreateAccount(event)">
-            <input type="text" placeholder="Nombre" required id="signupName" />
-            <input type="email" placeholder="Correo" required id="signupEmail" />
-            <input type="password" placeholder="Contraseña" required id="signupPassword" />
-            <button type="submit">Crear Cuenta</button>
-        </form>
-        <p class="login-prompt">¿Ya tienes una cuenta? <a href="../login/login.component.html" id="loginLink">Iniciar Sesión</a></p>
+        <div class="signup-inner-container">
+            <!-- Imagen -->
+            <div class="image-container">
+                <img src="../images/Logo.png" alt="Imagen de la plataforma" class="login-image" />
+            </div>
+
+            <!-- Formulario -->
+            <div class="form-container">
+                <h2>Crear Cuenta</h2>
+                <form onsubmit="return handleCreateAccount(event)">
+                    <input type="text" placeholder="Nombre" required id="signupName" />
+                    <input type="email" placeholder="Correo" required id="signupEmail" />
+                    <input type="password" placeholder="Contraseña" required id="signupPassword" />
+                    <button type="submit">Crear Cuenta</button>
+                </form>
+                <p class="login-prompt">¿Ya tienes una cuenta? <a href="../login/login.component.html" id="loginLink">Iniciar Sesión</a></p>
+            </div>
+        </div>
     </div>
 
     <script>
         function handleCreateAccount(event) {
             event.preventDefault(); // Prevenir el comportamiento de envío del formulario
 
-            // Aquí puedes agregar la lógica para manejar la creación de cuenta
+            // Lógica para manejar la creación de cuenta
             const name = document.getElementById('signupName').value;
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
 
-            // Simulación de creación de cuenta (puedes agregar lógica de backend aquí)
+            // Simulación de creación de cuenta (agregar lógica backend aquí)
 
             // Redirigir al login después de crear la cuenta
             window.location.href = '.../login/login.component.html';
