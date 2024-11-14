@@ -8,41 +8,53 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>¿Quién eres?</h2>
-        <div class="toggle-options">
-            <button class="toggle-button" id="userButton" onclick="showUserForm()">Usuario</button>
-            <button class="toggle-button" id="companyButton" onclick="showCompanyForm()">Empresa</button>
-        </div>
-    
-        <div class="login-form" id="userForm" style="display: none;">
-            <!-- Formulario de Usuario -->
-            <form onsubmit="return handleLogin(event, 'user')">
-                <h3>Login Usuario</h3>
-                <input type="email" placeholder="Correo" required id="userEmail" />
-                <input type="password" placeholder="Contraseña" required id="userPassword" />
-                <button type="submit">Iniciar Sesión</button>
-                <div class="error" id="userError" style="display: none;">
-                    <p>Credenciales incorrectas. Inténtalo de nuevo.</p>
+        <div class="login-inner-container">
+            <!-- Columna izquierda (Formulario) -->
+            <div class="form-container">
+                <h2>¿Quién eres?</h2>
+                <div class="toggle-options">
+                    <button class="toggle-button" id="userButton" onclick="showUserForm()">Usuario</button>
+                    <button class="toggle-button" id="companyButton" onclick="showCompanyForm()">Empresa</button>
                 </div>
-            </form>
-            <p class="forgot-password"><a href="../recover-password/recover-password.component.html">Olvidé mi contraseña</a></p>
-        </div>
-    
-        <div class="login-form" id="companyForm" style="display: none;">
-            <!-- Formulario de Empresa -->
-            <form onsubmit="return handleLogin(event, 'company')">
-                <h3>Login Empresa</h3>
-                <input type="email" placeholder="Correo de empresa" required id="companyEmail" />
-                <input type="password" placeholder="Contraseña" required id="companyPassword" />
-                <button type="submit" id="loginButton">Iniciar Sesión</button>
-                <div class="error" id="companyError" style="display: none;">
-                    <p>Credenciales incorrectas. Inténtalo de nuevo.</p>
-                </div>
-            </form>
-            <p class="forgot-password"><a href="../recover-password/recover-password.component.html">Olvidé mi contraseña</a></p>
-        </div>
 
-        <p class="signup-prompt">¿No tienes una cuenta? <a href="../signup/signup.component.html" id="createAccountLink">Crear cuenta</a></p>
+                <!-- Formulario de Usuario -->
+                <div class="login-form" id="userForm" style="display: none;">
+                    <button type="button" class="back-button" onclick="goBack()">Volver</button>
+                    <form onsubmit="return handleLogin(event, 'user')">
+                        <h3>Login Usuario</h3>
+                        <input type="email" placeholder="Correo" required id="userEmail" />
+                        <input type="password" placeholder="Contraseña" required id="userPassword" />
+                        <button type="submit">Iniciar Sesión</button>
+                        <div class="error" id="userError" style="display: none;">
+                            <p>Credenciales incorrectas. Inténtalo de nuevo.</p>
+                        </div>
+                    </form>
+                    <p class="forgot-password"><a href="../recover-password/recover-password.component.html">Olvidé mi contraseña</a></p>
+                </div>
+
+                <!-- Formulario de Empresa -->
+                <div class="login-form" id="companyForm" style="display: none;">
+                    <button type="button" class="back-button" onclick="goBack()">Volver</button>
+                    <form onsubmit="return handleLogin(event, 'company')">
+                        <h3>Login Empresa</h3>
+                        <input type="email" placeholder="Correo de empresa" required id="companyEmail" />
+                        <input type="password" placeholder="Contraseña" required id="companyPassword" />
+                        <button type="submit" id="loginButton">Iniciar Sesión</button>
+                        <div class="error" id="companyError" style="display: none;">
+                            <p>Credenciales incorrectas. Inténtalo de nuevo.</p>
+                        </div>
+                    </form>
+                    <p class="forgot-password"><a href="../recover-password/recover-password.component.html">Olvidé mi contraseña</a></p>
+                </div>
+
+                <p class="signup-prompt">¿No tienes una cuenta? <a href="../signup/signup.component.html" id="createAccountLink">Crear cuenta</a></p>
+            </div>
+
+            <!-- Columna derecha (Imagen) -->
+            <div class="image-container">
+                <img src="../images/Logo.png" alt="Imagen de ejemplo" class="login-image" />
+            </div>
+        </div>
     </div>
     
     <script src="scripts.js"></script>
