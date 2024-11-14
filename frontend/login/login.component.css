@@ -1,3 +1,4 @@
+/* Reset global de márgenes y rellenos */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,6 +6,7 @@
     font-family: 'Arial', sans-serif;
 }
 
+/* Estilo general del cuerpo */
 body {
     display: flex;
     justify-content: center;
@@ -13,14 +15,48 @@ body {
     background-color: #eceff1;
 }
 
+/* Contenedor principal con estilo adicional */
 .login-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 1000px;
     padding: 25px;
+    display: flex; /* Utilizamos flexbox para dividir en dos columnas */
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15); /* Sombra para darle profundidad */
+    border: 2px solid #b0bec5; /* Borde sutil para el cuadro */
+    overflow: hidden; /* Evita que el cuadro crezca */
+}
+
+/* Contenedor interno de las dos columnas */
+.login-inner-container {
+    display: flex;
+    width: 100%;
+}
+
+/* Estilo para la columna del formulario */
+.form-container {
+    width: 50%; /* La mitad izquierda ocupará el 50% */
+    padding: 40px;
     background-color: #ffffff;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     text-align: center;
+    overflow: hidden; /* Evita que el formulario salga del contenedor */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Añadir un borde superior */
+.form-container::before {
+    content: "";
+    display: block;
+    height: 4px;
+    background-color: #0288d1;
+    border-radius: 4px;
+    margin-bottom: 20px;
 }
 
 h2 {
@@ -110,4 +146,40 @@ button:hover {
 .signup-prompt a {
     color: #0288d1;
     text-decoration: none;
+}
+
+/* Estilo para la columna de la imagen */
+.image-container {
+    width: 50%; /* La mitad derecha ocupará el 50% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px; /* Agregar espacio alrededor de la imagen */
+    background-color: #f5f5f5;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Imagen dentro del contenedor */
+.login-image {
+    max-width: 90%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón de "Volver" */
+.back-button {
+    background-color: #cfd8dc;
+    color: #37474f;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.back-button:hover {
+    background-color: #b0bec5;
 }
